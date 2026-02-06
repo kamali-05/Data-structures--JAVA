@@ -1,42 +1,42 @@
 package sorting;
 import java.util.Arrays;
 public class Mergesort {
-    public static int[] Msort(int[] a,int[] b){
-        int al=a.length;
-        int bl=b.length;
-        int[] res=new int[al+bl];
-        int i=0,j=0,k=0;
-        while(i<al&&j<bl){
-            if(a[i]<b[j]){
+    public static void Msort(int[] a,int start,int mid,int end){
+        int[] res=new int[a.length];
+        int i=start,j=mid,k=0;
+        while(i<mid&&j<end){//bcoz mid=4(a.length/2)
+            if(a[i]<a[j]){
                 res[k++]=a[i];
                 i++;
             }
-            else if(b[j]<a[i]){
-                res[k++]=b[j];
+            else if(a[j]<a[i]){
+                res[k++]=a[j];
                 j++;
             }
             else{
                 res[k++]=a[i];
-                res[k++]=b[j];
+                res[k++]=a[j];
                 i++;
                 j++;
             }
         }
-        while(i<al){
+        while(i<mid){
             res[k++]=a[i];
             i++;
         }
-        while(j<bl){
-            res[k++]=b[j];
+        while(j<end){
+            res[k++]=a[j];
             j++;
         }
-        return res;
+       for(int itr=0;itr<res.length;itr++){
+           a[itr]=res[itr];
+       }
     }
     public static void main(String[] args) {
-        int[] a={1,3,5,6};
-        int[] b={2,3,6,7,8};
-        int[] res=Msort(a,b);
-        System.out.print(Arrays.toString(res));
+        int[] a={1,3,5,6,2,7,8,10};
+        int mid=a.length/2;
+        Msort(a,0,mid,a.length);
+        System.out.print(Arrays.toString(a));
     }
 
 }
